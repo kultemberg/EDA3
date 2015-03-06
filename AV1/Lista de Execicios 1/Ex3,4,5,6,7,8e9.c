@@ -1,16 +1,21 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "funcoes.h"
+#include "funcoesLE.h"
 
 int main()
 {
-    TNo *lista;
-    lista = NULL;
+    TNo *lista = inicializaLista();
+    //int chave[] = {1,2,3,4,5};
+    //int valor[] = {5,4,3,2,1};
+    //lista = criaLE(chave,valor,5);
+
+    /*
     lista = add(lista,2,10);
-    lista = addFinal(lista,3,20);
-    lista = add(lista,1,0);
-    printLE(lista);
-    printf("%d\n",buscaValor(lista,2));
-    lista = removeNo(lista,2);
-    printf("Soma LE: %d",somaLE(lista));
+    lista = addFinal(lista,90,70);
+    lista = add(lista,1,1);
+    lista = addFinal(lista,200,70);
+    */
+
+    //printfLE(lista);
+
 }

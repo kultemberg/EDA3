@@ -5,6 +5,7 @@ typedef struct No{
 }TNo;
 
 //Protótipo das funções
+TNo *inicializaLista();
 TNo *add(TNo *l,int chave, int valor);
 TNo *addFinal(TNo *l,int chave, int valor);
 void printLE(TNo *l);
@@ -12,6 +13,12 @@ int buscaValor(TNo *l, int chave);
 TNo *removeNo(TNo *l, int chave);
 TNo *criaLE(int chave[], int valor[], int TAM);
 int somaLE(TNo *l);
+
+
+TNo *inicializaLista()
+{
+    return NULL;
+}
 
 //Ex3
 TNo *add(TNo* l,int chave, int valor)
@@ -39,6 +46,7 @@ TNo *add(TNo* l,int chave, int valor)
 TNo *addFinal(TNo *l,int chave, int valor)
 {
 	TNo *novoNo;
+	TNo *aux = l;
 	novoNo = (TNo*)malloc(sizeof(TNo));
 	novoNo->chave = chave;
 	novoNo->valor = valor;
@@ -47,9 +55,9 @@ TNo *addFinal(TNo *l,int chave, int valor)
 	{
 		return NULL;
 	}else{
-		while(l->prox != NULL)
-			l->prox = NULL;
-		l->prox = novoNo;
+		while(aux->prox != NULL)
+            aux = aux->prox;
+        aux->prox = novoNo;
 	}
 	return l;
 }
@@ -59,7 +67,7 @@ void printLE(TNo *l)
 {
 	if (!l)
 	{
-		printf("\nFim da lista\n");
+		printf("\nFim da lista\n\n");
 		return;
 	}
 	else{
@@ -90,30 +98,39 @@ int buscaValor(TNo *l, int chave)
 //Ex7
 TNo *removeNo(TNo *l, int chave)
 {
-	TNo *aux;
+	TNo *noAnterior, *noAtual;
+    noAnterior = noAtual = l;
 	if(!l)
 	{
 		printf("Chave nao encontrada\n");
 		return l;
 	}else{
-		if (l->chave == chave)
-		{
-			aux = l;
-			l = l->prox;
-			free(aux);
-		}else{
-			return removeNo(l->prox,chave);
-		}
+		while(noAtual != NULL != noAtual->chave == chave)
+        {
+            noAnterior = noAtual;
+            noAtual = noAtual->prox;
+        }
+        if (noAtual == NULL)
+        {
+            return l;
+        }else if (noAtual == l)
+        {
+            l = l->prox;
+            free(noAtual);
+        }else{
+            noAnterior->prox = noAtual->prox;
+            free(noAtual);
+        }
+    return l;
 	}
 }
 
 //Ex8
 TNo *criaLE(int chave[], int valor[], int TAM)
 {
-	TNo *l;
+	TNo *l = inicializaLista();
 	int i;
-	l = NULL;
-	for(i=0; i<=TAM; i++)
+	for(i=0; i<TAM; i++)
 	{
 		l = add(l,chave[i],valor[i]);
 	}
